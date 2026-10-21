@@ -104,7 +104,12 @@ function initGalleryFilter() {
       const filter = btn.getAttribute("data-filter");
       cards.forEach(function (card) {
         const show = filter === "all" || card.getAttribute("data-category") === filter;
-        card.style.display = show ? "" : "none";
+        const col = card.parentElement;
+        if (col) {
+          col.style.display = show ? "" : "none";
+        } else {
+          card.style.display = show ? "" : "none";
+        }
       });
     });
   });

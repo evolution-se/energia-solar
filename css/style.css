@@ -441,6 +441,10 @@ footer a:focus-visible {
 .region-chip i {
   color: var(--accent);
 }
+#regioes p,
+#regioes small {
+  color: var(--text-light);
+}
 .accordion-brand .accordion-item {
   margin-bottom: 0.7rem;
   overflow: hidden;

@@ -201,6 +201,37 @@ function initBackToTop() {
   });
 }
 
+function initNavActiveOnClick() {
+  const navLinks = Array.from(document.querySelectorAll(".header-site .navbar-nav .nav-link[href^='#']"));
+  if (!navLinks.length) {
+    return;
+  }
+  function setActive(link) {
+    navLinks.forEach(function (l) {
+      const isActive = l === link;
+      l.classList.toggle("active", isActive);
+      if (isActive) {
+        l.setAttribute("aria-current", "page");
+      } else {
+        l.removeAttribute("aria-current");
+      }
+    });
+  }
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      setActive(link);
+    });
+  });
+  if (window.location.hash) {
+    const match = navLinks.find(function (l) {
+      return l.getAttribute("href") === window.location.hash;
+    });
+    if (match) {
+      setActive(match);
+    }
+  }
+}
+
 // Ano atual no rodape.
 function setCurrentYear() {
   document.querySelectorAll("[data-year]").forEach(function (el) {
@@ -213,6 +244,7 @@ function init() {
   document.documentElement.classList.add("js");
   initWhatsAppLinks();
   initHeaderScroll();
+  initNavActiveOnClick();
   initMobileMenu();
   initRevealOnScroll();
   initGalleryFilter();
